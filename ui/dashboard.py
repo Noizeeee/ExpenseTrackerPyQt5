@@ -24,7 +24,6 @@ class Dashboard(QMainWindow):
         super().__init__()
 
 app = QApplication(sys.argv)
-
 window = Dashboard()
 window.show()
 
