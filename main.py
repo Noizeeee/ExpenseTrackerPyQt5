@@ -1,7 +1,7 @@
 import sys
 
 from PyQt5.QtWidgets import QApplication
-from ui.dashboard import Dashboard
+from pages.dashboard import Dashboard
 
 
 def main():

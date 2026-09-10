@@ -25,33 +25,9 @@ class Dashboard(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setFixedSize(1200, 700)
-        self.setStyleSheet("""
-                            #sidebarButton {
-                                border: none;
-                                border-radius: 0px;
-                                padding: 0px 20px;
-                                text-align: left;
-                                background-color: transparent;
-                                color: #a1a1aa;
-                            }
 
-                            #sidebarButton:hover {
-                                background-color: #27272a;
-                                color: white;
-                            }
-
-                            #sidebarButton:pressed {
-                                background-color: #3f3f46;
-                            }
-                            #header {
-                                background-color: #0F172A; }
-                            #header QLabel { 
-                                color: #38BDF8; }
-                            #sidebar { 
-                                background-color: #1E293B; }
-                            #content { 
-                                background-color: #090D16; }
-                                """)
+        with open("styles/dashboard.qss", "r") as file:
+            self.setStyleSheet(file.read())
         self.create_main()
 
     def create_main(self):
