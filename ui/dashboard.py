@@ -15,6 +15,8 @@ from PyQt5.QtWidgets import (
     QSizePolicy
 )
 
+from backend.date_manager import get_current_date
+
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
 
@@ -45,7 +47,8 @@ class Dashboard(QMainWindow):
         title = QLabel("EXPENSE TRACKER")
         title.setFont(QFont("Arial", 24, QFont.Bold))
 
-        date = QLabel("Date: mm/dd/yyyy")
+
+        date = QLabel(f"Date: {get_current_date()}")
         date.setFont(QFont("Arial", 14))
 
         header_layout.addWidget(title)
