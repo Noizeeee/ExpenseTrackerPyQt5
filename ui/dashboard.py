@@ -38,6 +38,7 @@ class Dashboard(QMainWindow):
 
         #Margin
         main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.setSpacing(0)
 
         #Header
         header = QWidget()
