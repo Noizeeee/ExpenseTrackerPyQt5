@@ -25,6 +25,11 @@ class Dashboard(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setFixedSize(1200, 700)
+        self.setStyleSheet("""
+                            #header { background-color: #0F172A; }
+                            #header QLabel { color: #38BDF8; } /* Slate Black */
+                            #sidebar { background-color: #1E293B; } /* Deep Tech Blue */
+                            #content { background-color: #090D16; } /* Dark Void (Non-White) */""")
         self.create_main()
 
     def create_main(self):
@@ -42,6 +47,8 @@ class Dashboard(QMainWindow):
 
         #Header
         header = QWidget()
+        header.setObjectName("header")
+        
         header_layout = QHBoxLayout()
         header.setLayout(header_layout)
 
@@ -61,6 +68,8 @@ class Dashboard(QMainWindow):
 
         # Left
         sidebar = QWidget()
+        sidebar.setObjectName("sidebar")
+
         sidebar.setFixedWidth(200)
         sidebar_layout = QVBoxLayout()
         sidebar.setLayout(sidebar_layout)
@@ -83,6 +92,7 @@ class Dashboard(QMainWindow):
 
         # Right
         content = QWidget()
+        content.setObjectName("content")
         content_layout = QVBoxLayout()
         content.setLayout(content_layout)
 
