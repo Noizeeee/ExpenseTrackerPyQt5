@@ -36,7 +36,25 @@ class Dashboard(QMainWindow):
 
         # Left
         sidebar = QWidget()
-        sidebar.setFixedWidth(700)
+        sidebar.setFixedWidth(200)
+        sidebar_layout = QVBoxLayout()
+        sidebar.setLayout(sidebar_layout)
+
+        #buttons
+        dashboard_btn = QPushButton("Dashboard")
+        expenses_btn = QPushButton("Expenses")
+        income_btn = QPushButton("Income")
+
+        dashboard_btn.setFixedSize(150, 100)
+        expenses_btn.setFixedSize(150, 100)
+        income_btn.setFixedSize(150, 100)
+
+        sidebar_layout.addWidget(dashboard_btn)
+        sidebar_layout.addWidget(expenses_btn)
+        sidebar_layout.addWidget(income_btn)
+
+        sidebar_layout.setAlignment(Qt.AlignCenter)
+
 
         # Right
         content = QWidget()
