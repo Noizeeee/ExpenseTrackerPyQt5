@@ -108,6 +108,19 @@ class Dashboard(QMainWindow):
 
         self.dashboard_btn.setChecked(True)
 
+        #Button Function
+        self.dashboard_btn.clicked.connect(
+            lambda: self.show_page("dashboard")
+        )
+
+        self.reports_btn.clicked.connect(
+                    lambda: self.show_page("reports")
+        )
+
+        self.add_expenses_btn.clicked.connect(
+                    lambda: self.show_page("add_expenses")
+        )
+
         sidebar_layout.addWidget(self.dashboard_btn)
         sidebar_layout.addWidget(self.reports_btn)
         sidebar_layout.addWidget(self.add_expenses_btn)
@@ -116,21 +129,46 @@ class Dashboard(QMainWindow):
 
 
         # Right
-        content = QWidget()
-        content.setObjectName("content")
-        content_layout = QVBoxLayout()
-        content.setLayout(content_layout)
+        self.content = QWidget()
+        self.content.setObjectName("content")
+        self.content_layout = QVBoxLayout()
+        self.content.setLayout(self.content_layout)
 
         # Text
         label = QLabel("Expenses:")
         label.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
-        content_layout.addWidget(label)
+        self.content_layout.addWidget(label)
 
         #Body Layout for Left and Right Display
         body_layout = QHBoxLayout()
         body_layout.addWidget(sidebar)
-        body_layout.addWidget(content)
+        body_layout.addWidget(self.content)
 
         main_layout.addLayout(body_layout)
+
+    def show_page(self, page):
+        # Remove the current content
+        while self.content_layout.count():
+            item = self.content_layout.takeAt(0)
+
+            widget = item.widget()
+
+            if widget:
+                widget.deleteLater()
+
+        # Add new content
+        if page == "dashboard":
+            label = QLabel("Dashboard")
+
+        elif page == "reports":
+            label = QLabel("Reports")
+
+        elif page == "add_expenses":
+            label = QLabel("Add Expenses")
+
+        label.setAlignment(Qt.AlignCenter)
+        label.setFont(QFont("Arial", 24, QFont.Bold))
+
+        self.content_layout.addWidget(label)
 
 
