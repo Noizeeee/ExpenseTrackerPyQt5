@@ -12,7 +12,8 @@ from PyQt5.QtWidgets import (
     QGridLayout,
     QFrame,
     QSpacerItem,
-    QSizePolicy
+    QSizePolicy,
+    QButtonGroup
 )
 
 from backend.date_manager import get_current_date
@@ -28,6 +29,7 @@ class Dashboard(QMainWindow):
 
         with open("styles/dashboard.qss", "r") as file:
             self.setStyleSheet(file.read())
+            
         self.create_main()
 
     def create_main(self):
@@ -82,21 +84,33 @@ class Dashboard(QMainWindow):
         sidebar.setLayout(sidebar_layout)
 
         #buttons
-        dashboard_btn = QPushButton("Dashboard")
-        reports_btn = QPushButton("Reports")
-        add_expenses_btn = QPushButton("Add Expenses")
+        self.dashboard_btn = QPushButton("Dashboard")
+        self.reports_btn = QPushButton("Reports")
+        self.add_expenses_btn = QPushButton("Add Expenses")
 
-        dashboard_btn.setObjectName("sidebarButton")
-        reports_btn.setObjectName("sidebarButton")
-        add_expenses_btn.setObjectName("sidebarButton")
+        self.dashboard_btn.setObjectName("sidebarButton")
+        self.reports_btn.setObjectName("sidebarButton")
+        self.add_expenses_btn.setObjectName("sidebarButton")
 
-        for button in [dashboard_btn, reports_btn, add_expenses_btn]:
+        for button in [self.dashboard_btn, self.reports_btn, self.add_expenses_btn]:
             button.setFixedHeight(100)
             button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+            button.setCheckable(True)
 
-        sidebar_layout.addWidget(dashboard_btn)
-        sidebar_layout.addWidget(reports_btn)
-        sidebar_layout.addWidget(add_expenses_btn)
+        #Create button Group
+        self.button_group = QButtonGroup(self)
+        self.button_group.addButton(self.dashboard_btn)
+        self.button_group.addButton(self.reports_btn)
+        self.button_group.addButton(self.add_expenses_btn)
+
+        #ONLY ONE Button active at a time
+        self.button_group.setExclusive(True)
+
+        self.dashboard_btn.setChecked(True)
+
+        sidebar_layout.addWidget(self.dashboard_btn)
+        sidebar_layout.addWidget(self.reports_btn)
+        sidebar_layout.addWidget(self.add_expenses_btn)
 
         sidebar_layout.setAlignment(Qt.AlignCenter)
 

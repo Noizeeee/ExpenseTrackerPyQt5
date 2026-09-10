@@ -26,6 +26,10 @@
 #sidebar { 
     background-color: #1E293B; 
     }
+
+#sidebarButton:checked {
+    background-color: #555555;
+}
     
 #content { 
     background-color: #090D16; 
