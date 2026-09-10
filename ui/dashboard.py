@@ -26,10 +26,32 @@ class Dashboard(QMainWindow):
         super().__init__()
         self.setFixedSize(1200, 700)
         self.setStyleSheet("""
-                            #header { background-color: #0F172A; }
-                            #header QLabel { color: #38BDF8; } /* Slate Black */
-                            #sidebar { background-color: #1E293B; } /* Deep Tech Blue */
-                            #content { background-color: #090D16; } /* Dark Void (Non-White) */""")
+                            #sidebarButton {
+                                border: none;
+                                border-radius: 0px;
+                                padding: 0px 20px;
+                                text-align: left;
+                                background-color: transparent;
+                                color: #a1a1aa;
+                            }
+
+                            #sidebarButton:hover {
+                                background-color: #27272a;
+                                color: white;
+                            }
+
+                            #sidebarButton:pressed {
+                                background-color: #3f3f46;
+                            }
+                            #header {
+                                background-color: #0F172A; }
+                            #header QLabel { 
+                                color: #38BDF8; }
+                            #sidebar { 
+                                background-color: #1E293B; }
+                            #content { 
+                                background-color: #090D16; }
+                                """)
         self.create_main()
 
     def create_main(self):
@@ -52,6 +74,10 @@ class Dashboard(QMainWindow):
         header_layout = QHBoxLayout()
         header.setLayout(header_layout)
 
+        #Margin
+        header_layout.setContentsMargins(30, 0, 30, 0)
+        header_layout.setSpacing(0)
+
         title = QLabel("EXPENSE TRACKER")
         title.setFont(QFont("Arial", 24, QFont.Bold))
 
@@ -72,6 +98,11 @@ class Dashboard(QMainWindow):
 
         sidebar.setFixedWidth(200)
         sidebar_layout = QVBoxLayout()
+
+        #Margin
+        sidebar_layout.setContentsMargins(0, 0, 0, 0)
+        sidebar_layout.setSpacing(40)
+        
         sidebar.setLayout(sidebar_layout)
 
         #buttons
@@ -79,9 +110,13 @@ class Dashboard(QMainWindow):
         reports_btn = QPushButton("Reports")
         add_expenses_btn = QPushButton("Add Expenses")
 
-        dashboard_btn.setFixedSize(150, 100)
-        reports_btn.setFixedSize(150, 100)
-        add_expenses_btn.setFixedSize(150, 100)
+        dashboard_btn.setObjectName("sidebarButton")
+        reports_btn.setObjectName("sidebarButton")
+        add_expenses_btn.setObjectName("sidebarButton")
+
+        for button in [dashboard_btn, reports_btn, add_expenses_btn]:
+            button.setFixedHeight(100)
+            button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
 
         sidebar_layout.addWidget(dashboard_btn)
         sidebar_layout.addWidget(reports_btn)
