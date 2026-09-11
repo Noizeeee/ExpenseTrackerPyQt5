@@ -134,6 +134,12 @@ class Dashboard(QMainWindow):
         self.content_layout = QVBoxLayout()
         self.content.setLayout(self.content_layout)
 
+        #Grid for Three Box
+        Grid = QWidget()
+        grid_layout = QGridLayout()
+        Grid.setLayout(grid_layout)
+        self.content_layout.addWidget(Grid)
+
         # Text
         label = QLabel("Expenses:")
         label.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
