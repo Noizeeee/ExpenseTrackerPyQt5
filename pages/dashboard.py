@@ -137,6 +137,9 @@ class Dashboard(QMainWindow):
         #Grid for Three Box
         Grid = QWidget()
         grid_layout = QGridLayout()
+        grid_layout.addWidget(QPushButton("Left"), 1, 0)
+        grid_layout.addWidget(QPushButton("Middle"), 1, 1)
+        grid_layout.addWidget(QPushButton("Right"), 1, 2)
         Grid.setLayout(grid_layout)
         self.content_layout.addWidget(Grid)
 
