@@ -181,3 +181,4 @@ class Dashboard(QMainWindow):
         self.content_layout.addWidget(label)
 
 
+#Add DASHBOARD ELEMENTS
