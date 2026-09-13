@@ -7,6 +7,7 @@ from matplotlib.figure import Figure
 
 from PyQt5.QtWidgets import (
     QApplication,
+    QHeaderView,
     QMainWindow,
     QWidget,
     QLabel,
@@ -296,7 +297,10 @@ class Dashboard(QMainWindow):
             "Category",
             "Amount"
         ])
+        table.horizontalHeader().setDefaultAlignment(Qt.AlignCenter)
 
+        # Make all columns fill the table
+        table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         return table
     def create_pie(self):
         figure = Figure(figsize=(5,3))
