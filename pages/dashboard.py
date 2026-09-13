@@ -160,13 +160,7 @@ class Dashboard(QMainWindow):
         grid_layout.setColumnStretch(1, 1)
         grid_layout.setColumnStretch(2, 1)
         Grid.setLayout(grid_layout)
-        Grid.setAlignment(Qt.AlignCenter)
         self.content_layout.addWidget(Grid)
-
-        # Text
-        label = QLabel("Expenses:")
-        label.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
-        self.content_layout.addWidget(label)
 
         #Body Layout for Left and Right Display
         body_layout = QHBoxLayout()
@@ -220,15 +214,41 @@ class Dashboard(QMainWindow):
 
         # Add new content
         if page == "dashboard":
-            label = QLabel("Dashboard")
+            #Grid for Three Box
+            Grid = QWidget()
+            grid_layout = QGridLayout()
+            
+            grid_layout.setContentsMargins(20, 20, 20, 20)
+            grid_layout.setSpacing(20)
+    
+            #Left Graph
+            grid_layout.addWidget(QPushButton("Left"), 1, 0)
+            
+            #Center Graph
+            graph = self.create_graph()
+            grid_layout.addWidget(graph, 1, 1)
+            
+            #Right Graph
+            grid_layout.addWidget(QPushButton("Right"), 1, 2)
+            
+            #Set Column Size
+            grid_layout.setColumnStretch(0, 1)
+            grid_layout.setColumnStretch(1, 1)
+            grid_layout.setColumnStretch(2, 1)
+            Grid.setLayout(grid_layout)
+            self.content_layout.addWidget(Grid)
 
         elif page == "reports":
             label = QLabel("Reports")
+            label.setAlignment(Qt.AlignCenter)
+            label.setFont(QFont("Arial", 24, QFont.Bold))
+            
+            self.content_layout.addWidget(label)
 
         elif page == "add_expenses":
             label = QLabel("Add Expenses")
+            label.setAlignment(Qt.AlignCenter)
+            label.setFont(QFont("Arial", 24, QFont.Bold))
+                        
+            self.content_layout.addWidget(label)
 
-        label.setAlignment(Qt.AlignCenter)
-        label.setFont(QFont("Arial", 24, QFont.Bold))
-
-        self.content_layout.addWidget(label)
