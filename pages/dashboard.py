@@ -160,6 +160,7 @@ class Dashboard(QMainWindow):
         grid_layout.setColumnStretch(1, 1)
         grid_layout.setColumnStretch(2, 1)
         Grid.setLayout(grid_layout)
+        Grid.setAlignment(Qt.AlignCenter)
         self.content_layout.addWidget(Grid)
 
         # Text
@@ -175,16 +176,24 @@ class Dashboard(QMainWindow):
         main_layout.addLayout(body_layout)
 
     def create_graph(self):
-        figure = Figure()
+        figure = Figure(figsize=(5, 3))
         canvas = FigureCanvas(figure)
 
-        months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        canvas.setSizePolicy(
+            QSizePolicy.Expanding,
+            QSizePolicy.Expanding
+        )
+
+
+        months = ["Jan", "Feb", "Mar", "Apr",
+        "May", "Jun", "Jul", "Aug",
+        "Sep", "Oct", "Nov", "Dec"]
         expenses = [500, 200, 1000, 3000, 2000, 0, 0, 0, 0, 2000, 7000, 300]
 
         # Left graph
         ax = figure.add_subplot(111)
 
-        ax.plot(months, expenses)
+        ax.bar(months, expenses)
 
         ax.tick_params(axis="x", rotation=45)
 
