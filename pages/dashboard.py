@@ -36,18 +36,93 @@ class Dashboard(QMainWindow):
             
         self.create_main()
 
+    def create_dashboard(self):
+        #Grid for Three Cards
+        Cards = QWidget()
+        cards_layout = QHBoxLayout()
+        Cards.setLayout(cards_layout)
+
+        cards_layout.setContentsMargins(20, 20, 20, 20)
+        cards_layout.setSpacing(20)
+
+        # Left Card
+        total_expenses = QFrame()
+        total_expenses_layout = QVBoxLayout()
+
+        total_expenses_title = QLabel("Total Expenses")
+        total_expenses_value = QLabel("₱88,250")
+
+        total_expenses_layout.addWidget(total_expenses_title)
+        total_expenses_layout.addWidget(total_expenses_value)
+
+        total_expenses.setLayout(total_expenses_layout)
+
+        # Center Card
+        monthly_expenses = QFrame()
+        monthly_expenses_layout = QVBoxLayout()
+
+        monthly_expenses_title = QLabel("This Month")
+        monthly_expenses_value = QLabel("₱8,250")
+
+        monthly_expenses_layout.addWidget(monthly_expenses_title)
+        monthly_expenses_layout.addWidget(monthly_expenses_value)
+
+        monthly_expenses.setLayout(monthly_expenses_layout)
+
+
+        # Right Card
+        average_daily = QFrame()
+        average_daily_layout = QVBoxLayout()
+
+        average_daily_title = QLabel("Avg. Daily")
+        average_daily_value = QLabel("₱275")
+
+        average_daily_layout.addWidget(average_daily_title)
+        average_daily_layout.addWidget(average_daily_value)
+
+        average_daily.setLayout(average_daily_layout)
+
+
+        # Add cards
+        cards_layout.addWidget(total_expenses, 1)
+        cards_layout.addWidget(monthly_expenses, 1)
+        cards_layout.addWidget(average_daily, 1)
+
+        self.content_layout.addWidget(Cards)
+
+        #Grid for Two Graphs
+        Grid = QWidget()
+        grid_layout = QGridLayout()
+
+        grid_layout.setContentsMargins(20, 20, 20, 20)
+        grid_layout.setSpacing(20)
+
+
+        #Left Graph
+        graph = self.create_graph()
+        grid_layout.addWidget(graph, 1, 0)
+
+        #Right Graph
+        grid_layout.addWidget(QPushButton("Right"), 1, 1)
+
+        #Set Column Size
+        grid_layout.setColumnStretch(0, 1)
+        grid_layout.setColumnStretch(1, 1)
+        Grid.setLayout(grid_layout)
+        self.content_layout.addWidget(Grid)
+
     def create_main(self):
-         # Main container
+        # Main container
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
 
         # Main Vertical layout
-        main_layout = QVBoxLayout()
-        central_widget.setLayout(main_layout)
+        self.main_layout = QVBoxLayout()
+        central_widget.setLayout(self.main_layout)
 
         #Margin
-        main_layout.setContentsMargins(0, 0, 0, 0)
-        main_layout.setSpacing(0)
+        self.main_layout.setContentsMargins(0, 0, 0, 0)
+        self.main_layout.setSpacing(0)
 
         #Header
         header = QWidget()
@@ -71,21 +146,21 @@ class Dashboard(QMainWindow):
         header_layout.addStretch()
         header_layout.addWidget(date)
         header.setFixedHeight(100)
-        main_layout.addWidget(header)
+        self.main_layout.addWidget(header)
 
 
         # Left
-        sidebar = QWidget()
-        sidebar.setObjectName("sidebar")
+        self.sidebar = QWidget()
+        self.sidebar.setObjectName("sidebar")
 
-        sidebar.setFixedWidth(200)
+        self.sidebar.setFixedWidth(200)
         sidebar_layout = QVBoxLayout()
 
         #Margin
         sidebar_layout.setContentsMargins(0, 0, 0, 0)
         sidebar_layout.setSpacing(40)
         
-        sidebar.setLayout(sidebar_layout)
+        self.sidebar.setLayout(sidebar_layout)
 
         #buttons
         self.dashboard_btn = QPushButton("Dashboard")
@@ -118,11 +193,11 @@ class Dashboard(QMainWindow):
         )
 
         self.reports_btn.clicked.connect(
-                    lambda: self.show_page("reports")
+            lambda: self.show_page("reports")
         )
 
         self.add_expenses_btn.clicked.connect(
-                    lambda: self.show_page("add_expenses")
+            lambda: self.show_page("add_expenses")
         )
 
         sidebar_layout.addWidget(self.dashboard_btn)
@@ -131,43 +206,21 @@ class Dashboard(QMainWindow):
 
         sidebar_layout.setAlignment(Qt.AlignCenter)
 
-
         # Right
         self.content = QWidget()
         self.content.setObjectName("content")
         self.content_layout = QVBoxLayout()
         self.content.setLayout(self.content_layout)
 
-        #Grid for Three Box
-        Grid = QWidget()
-        grid_layout = QGridLayout()
-
-        grid_layout.setContentsMargins(20, 20, 20, 20)
-        grid_layout.setSpacing(20)
-
-        #Left Graph
-        grid_layout.addWidget(QPushButton("Left"), 1, 0)
-
-        #Center Graph
-        graph = self.create_graph()
-        grid_layout.addWidget(graph, 1, 1)
-
-        #Right Graph
-        grid_layout.addWidget(QPushButton("Right"), 1, 2)
-
-        #Set Column Size
-        grid_layout.setColumnStretch(0, 1)
-        grid_layout.setColumnStretch(1, 1)
-        grid_layout.setColumnStretch(2, 1)
-        Grid.setLayout(grid_layout)
-        self.content_layout.addWidget(Grid)
-
         #Body Layout for Left and Right Display
         body_layout = QHBoxLayout()
-        body_layout.addWidget(sidebar)
+        body_layout.addWidget(self.sidebar)
         body_layout.addWidget(self.content)
 
-        main_layout.addLayout(body_layout)
+        self.main_layout.addLayout(body_layout)
+
+        self.show_page("dashboard")
+
 
     def create_graph(self):
         figure = Figure(figsize=(5, 3))
@@ -214,29 +267,7 @@ class Dashboard(QMainWindow):
 
         # Add new content
         if page == "dashboard":
-            #Grid for Three Box
-            Grid = QWidget()
-            grid_layout = QGridLayout()
-            
-            grid_layout.setContentsMargins(20, 20, 20, 20)
-            grid_layout.setSpacing(20)
-    
-            #Left Graph
-            grid_layout.addWidget(QPushButton("Left"), 1, 0)
-            
-            #Center Graph
-            graph = self.create_graph()
-            grid_layout.addWidget(graph, 1, 1)
-            
-            #Right Graph
-            grid_layout.addWidget(QPushButton("Right"), 1, 2)
-            
-            #Set Column Size
-            grid_layout.setColumnStretch(0, 1)
-            grid_layout.setColumnStretch(1, 1)
-            grid_layout.setColumnStretch(2, 1)
-            Grid.setLayout(grid_layout)
-            self.content_layout.addWidget(Grid)
+            self.create_dashboard()
 
         elif page == "reports":
             label = QLabel("Reports")
@@ -251,4 +282,3 @@ class Dashboard(QMainWindow):
             label.setFont(QFont("Arial", 24, QFont.Bold))
                         
             self.content_layout.addWidget(label)
-
