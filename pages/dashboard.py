@@ -95,6 +95,10 @@ class Dashboard(QMainWindow):
 
         #Grid for Two Graphs
         Grid = QWidget()
+        Grid.setSizePolicy(
+            QSizePolicy.Expanding,
+            QSizePolicy.Expanding
+        )
         grid_layout = QGridLayout()
 
         grid_layout.setContentsMargins(20, 20, 20, 20)
@@ -106,9 +110,13 @@ class Dashboard(QMainWindow):
         grid_layout.addWidget(graph, 1, 0)
 
         #Right Graph
-        grid_layout.addWidget(QPushButton("Right"), 1, 1)
+        pie = self.create_pie()
+        grid_layout.addWidget(pie, 1, 1)
 
         #Set Column Size
+        grid_layout.setColumnMinimumWidth(0, 400)
+        grid_layout.setColumnMinimumWidth(1, 400)
+
         grid_layout.setColumnStretch(0, 1)
         grid_layout.setColumnStretch(1, 1)
         Grid.setLayout(grid_layout)
@@ -247,8 +255,6 @@ class Dashboard(QMainWindow):
 
         ax.tick_params(axis="x", rotation=45)
 
-        ax.set_xticks([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-        ax.set_xticklabels(months)
         ax.set_yticks([0, 1000, 2000, 3000, 4000, 5000, 6000])
 
         ax.set_title("Expense Trend")
@@ -258,6 +264,31 @@ class Dashboard(QMainWindow):
         
         return canvas
 
+    def create_pie(self):
+        figure = Figure(figsize=(5,3))
+        canvas = FigureCanvas(figure)
+
+        canvas.setSizePolicy(
+            QSizePolicy.Expanding,
+            QSizePolicy.Expanding
+        )
+
+        categories = ["Food", "Transportation", "Bills", "Shopping"]
+        expenses = [5000, 3000, 7000, 2500]
+
+        ax = figure.add_subplot(111)
+
+        ax.pie(
+            expenses,
+            labels=categories,
+            autopct = "%1.1f%%"
+        )
+
+        ax.set_title("Expense Categories")
+
+        figure.tight_layout()
+
+        return canvas
     def show_page(self, page):
         # Remove the current content
         while self.content_layout.count():
