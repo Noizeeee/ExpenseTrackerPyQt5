@@ -47,6 +47,7 @@ class Dashboard(QMainWindow):
 
         # Left Card
         total_expenses = QFrame()
+        total_expenses.setObjectName("expenseCard")
         total_expenses_layout = QVBoxLayout()
 
         total_expenses_title = QLabel("Total Expenses")
@@ -59,6 +60,7 @@ class Dashboard(QMainWindow):
 
         # Center Card
         monthly_expenses = QFrame()
+        monthly_expenses.setObjectName("expenseCard")
         monthly_expenses_layout = QVBoxLayout()
 
         monthly_expenses_title = QLabel("This Month")
@@ -72,6 +74,7 @@ class Dashboard(QMainWindow):
 
         # Right Card
         average_daily = QFrame()
+        average_daily.setObjectName("expenseCard")
         average_daily_layout = QVBoxLayout()
 
         average_daily_title = QLabel("Avg. Daily")
