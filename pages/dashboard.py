@@ -17,7 +17,9 @@ from PyQt5.QtWidgets import (
     QFrame,
     QSpacerItem,
     QSizePolicy,
-    QButtonGroup
+    QButtonGroup,
+    QTableWidget,
+    QTableWidgetItem
 )
 
 from backend.date_manager import get_current_date
@@ -122,6 +124,18 @@ class Dashboard(QMainWindow):
         Grid.setLayout(grid_layout)
         self.content_layout.addWidget(Grid)
 
+        #Table
+        table_container = QWidget()
+        table_layout = QVBoxLayout()
+
+        table_layout.setContentsMargins(20, 20, 20, 20)
+
+        table = self.create_table()
+        table_layout.addWidget(table)
+
+        table_container.setLayout(table_layout)
+        self.content_layout.addWidget(table_container)
+
     def create_main(self):
         # Main container
         central_widget = QWidget()
@@ -221,6 +235,8 @@ class Dashboard(QMainWindow):
         self.content = QWidget()
         self.content.setObjectName("content")
         self.content_layout = QVBoxLayout()
+        self.content_layout.setContentsMargins(0, 0, 0, 0)
+        self.content_layout.setSpacing(0)
         self.content.setLayout(self.content_layout)
 
         #Body Layout for Left and Right Display
@@ -264,6 +280,24 @@ class Dashboard(QMainWindow):
         
         return canvas
 
+    def create_table(self):
+        table = QTableWidget()
+        table.setSizePolicy(
+            QSizePolicy.Expanding,
+            QSizePolicy.Expanding
+        )
+
+
+        table.setColumnCount(4)
+
+        table.setHorizontalHeaderLabels([
+            "Date",
+            "Description",
+            "Category",
+            "Amount"
+        ])
+
+        return table
     def create_pie(self):
         figure = Figure(figsize=(5,3))
         canvas = FigureCanvas(figure)
