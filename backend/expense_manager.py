@@ -1,7 +1,7 @@
 from backend.supabase_client import supabase
 
 
-def get_all_expenses():
+def get_monthly_expenses():
     response = (
         supabase
         .table("expenses")

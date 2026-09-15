@@ -6,7 +6,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
 #Backend
-from backend.expense_manager import get_all_expenses
+from backend.expense_manager import get_monthly_expenses
 
 from PyQt5.QtWidgets import (
     QApplication,
@@ -255,7 +255,7 @@ class Dashboard(QMainWindow):
 
     def create_graph(self):
         try:
-            monthly_expenses = get_all_expenses()
+            monthly_expenses = get_monthly_expenses()
         except Exception as e:
             print(f"Error: {e}")
         figure = Figure(figsize=(5, 3))
