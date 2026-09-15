@@ -5,6 +5,9 @@ import sys
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
+#Backend
+from backend.expense_manager import get_all_expenses
+
 from PyQt5.QtWidgets import (
     QApplication,
     QHeaderView,
@@ -251,6 +254,10 @@ class Dashboard(QMainWindow):
 
 
     def create_graph(self):
+        try:
+            monthly_expenses = get_all_expenses()
+        except Exception as e:
+            print(f"Error: {e}")
         figure = Figure(figsize=(5, 3))
         canvas = FigureCanvas(figure)
 
@@ -268,7 +275,7 @@ class Dashboard(QMainWindow):
         # Left graph
         ax = figure.add_subplot(111)
 
-        ax.bar(months, expenses)
+        ax.bar(months, monthly_expenses)
 
         ax.tick_params(axis="x", rotation=45)
 
