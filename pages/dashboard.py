@@ -270,7 +270,6 @@ class Dashboard(QMainWindow):
         months = ["Jan", "Feb", "Mar", "Apr",
         "May", "Jun", "Jul", "Aug",
         "Sep", "Oct", "Nov", "Dec"]
-        expenses = [500, 200, 1000, 3000, 2000, 0, 0, 0, 0, 2000, 7000, 300]
 
         # Left graph
         ax = figure.add_subplot(111)

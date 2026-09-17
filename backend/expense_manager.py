@@ -21,3 +21,15 @@ def get_monthly_expenses():
         monthly_expenses[month - 1] += amount
 
     return monthly_expenses
+
+def get_categories():
+    response = (
+        supabase
+        .table("expenses")
+        .select("category, amount")
+        .execute()
+    )
+
+    categories = response.data
+
+    this_month_categories = []  
