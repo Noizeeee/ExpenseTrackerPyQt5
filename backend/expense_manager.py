@@ -49,8 +49,9 @@ def get_current_month_category_expenses():
         category = expense["category"]
         amount = float(expense["amount"])
 
-        category_totals[category] = (
-            category_totals.get(category, 0) + amount
-        )
+        if category not in category_totals:
+            category_totals[category] = 0
+
+        category_totals[category] += amount
 
     return category_totals
