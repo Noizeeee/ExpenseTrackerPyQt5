@@ -6,7 +6,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
 #Backend
-from backend.expense_manager import get_monthly_expenses
+from backend.expense_manager import get_monthly_expenses, get_current_month_category_expenses
 
 from PyQt5.QtWidgets import (
     QApplication,
@@ -310,6 +310,10 @@ class Dashboard(QMainWindow):
         return table
     #Pie Graph
     def create_pie(self):
+        try:
+            monthly_expenses = get_current_month_category_expenses()
+        except Exception as e:
+            print(f"Error: {e}")
         figure = Figure(figsize=(5,3))
         canvas = FigureCanvas(figure)
 
@@ -318,8 +322,8 @@ class Dashboard(QMainWindow):
             QSizePolicy.Expanding
         )
 
-        categories = ["Food", "Transportation", "Bills", "Shopping"]
-        expenses = [5000, 3000, 7000, 2500]
+        categories = list(monthly_expenses.keys())
+        expenses = list(monthly_expenses.values())
 
         ax = figure.add_subplot(111)
 
