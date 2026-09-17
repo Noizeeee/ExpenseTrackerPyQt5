@@ -308,6 +308,7 @@ class Dashboard(QMainWindow):
         # Make all columns fill the table
         table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         return table
+    
     #Pie Graph
     def create_pie(self):
         try:
