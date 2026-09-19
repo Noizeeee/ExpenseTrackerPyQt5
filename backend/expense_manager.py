@@ -55,3 +55,14 @@ def get_current_month_category_expenses():
         category_totals[category] += amount
 
     return category_totals
+
+def get_all_expenses():
+    response = (
+        supabase
+        .table("expenses")
+        .select("date, description, category, amount")
+        .order("date", desc=True)
+        .execute()
+    )
+
+    return response.data

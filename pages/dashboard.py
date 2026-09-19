@@ -6,7 +6,11 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
 #Backend
-from backend.expense_manager import get_monthly_expenses, get_current_month_category_expenses
+from backend.expense_manager import (
+    get_monthly_expenses,
+    get_current_month_category_expenses,
+    get_all_expenses
+)
 
 from PyQt5.QtWidgets import (
     QApplication,
@@ -286,14 +290,13 @@ class Dashboard(QMainWindow):
         figure.tight_layout()
         
         return canvas
-
     def create_table(self):
         table = QTableWidget()
+
         table.setSizePolicy(
             QSizePolicy.Expanding,
             QSizePolicy.Expanding
         )
-
 
         table.setColumnCount(4)
 
@@ -303,10 +306,23 @@ class Dashboard(QMainWindow):
             "Category",
             "Amount"
         ])
-        table.horizontalHeader().setDefaultAlignment(Qt.AlignCenter)
 
-        # Make all columns fill the table
+        table.horizontalHeader().setDefaultAlignment(Qt.AlignCenter)
         table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+
+        # Get expenses from Supabase
+        expenses = get_all_expenses()
+
+        # Set number of rows
+        table.setRowCount(len(expenses))
+
+        # Put each expense into the table
+        for row, expense in enumerate(expenses):
+            table.setItem(row, 0, QTableWidgetItem(str(expense["date"])))
+            table.setItem(row, 1, QTableWidgetItem(str(expense["description"])))
+            table.setItem(row, 2, QTableWidgetItem(str(expense["category"])))
+            table.setItem(row, 3, QTableWidgetItem(str(expense["amount"])))
+
         return table
     
     #Pie Graph
