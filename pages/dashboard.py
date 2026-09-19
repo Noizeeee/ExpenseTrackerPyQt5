@@ -9,7 +9,9 @@ from matplotlib.figure import Figure
 from backend.expense_manager import (
     get_monthly_expenses,
     get_current_month_category_expenses,
-    get_all_expenses
+    get_all_expenses,
+    cards_function,
+    get_current_month_expenses
 )
 
 from PyQt5.QtWidgets import (
@@ -61,7 +63,7 @@ class Dashboard(QMainWindow):
         total_expenses_layout = QVBoxLayout()
 
         total_expenses_title = QLabel("Total Expenses")
-        total_expenses_value = QLabel(self.cards_function())
+        total_expenses_value = QLabel(cards_function())
 
         total_expenses_layout.addWidget(total_expenses_title)
         total_expenses_layout.addWidget(total_expenses_value)
@@ -74,7 +76,7 @@ class Dashboard(QMainWindow):
         monthly_expenses_layout = QVBoxLayout()
 
         monthly_expenses_title = QLabel("This Month")
-        monthly_expenses_value = QLabel("₱8,250")
+        monthly_expenses_value = QLabel(get_current_month_expenses())
 
         monthly_expenses_layout.addWidget(monthly_expenses_title)
         monthly_expenses_layout.addWidget(monthly_expenses_value)
@@ -355,21 +357,7 @@ class Dashboard(QMainWindow):
         figure.tight_layout()
 
         return canvas
-
-    #Cards Backend
-    def cards_function(self):
-        total_expenses = 0
-        try:
-            expenses = get_all_expenses()
-        except Exception as e:
-            print(f"Error: {e}")
-
-        for expense in expenses:
-            current_expense = expense["amount"]
-            total_expenses += current_expense
-
-
-        return str(total_expenses)
+    
     def show_page(self, page):
         # Remove the current content
         while self.content_layout.count():

@@ -66,3 +66,59 @@ def get_all_expenses():
     )
 
     return response.data
+
+
+#Cards backend
+def cards_function():
+    total_expenses = 0
+    try:
+        expenses = get_all_expenses()
+    except Exception as e:
+        print(f"Error: {e}")
+
+    for expense in expenses:
+        current_expense = expense["amount"]
+        total_expenses += float(current_expense)
+
+    str(total_expenses)
+
+
+    return f"₱ {total_expenses}"
+
+#Current Month
+def get_current_month_expenses():
+    today = date.today()
+
+    start_of_month = today.replace(day=1)
+
+    if today.month == 12:
+        start_of_next_month = today.replace(
+            year=today.year + 1,
+            month=1,
+            day=1
+        )
+    else:
+        start_of_next_month = today.replace(
+            month=today.month + 1,
+            day=1
+        )
+    try:
+        response = (
+            supabase
+            .table("expenses")
+            .select("*")
+            .gte("date", str(start_of_month))
+            .lt("date", str(start_of_next_month))
+            .execute()
+        )
+    except Exception as e:
+        print(f"Error: {e}")
+
+    total = 0
+    for expense in response.data:
+        currentAmount = expense["amount"]
+        total += float(currentAmount)
+
+    str(total)
+    
+    return f"₱ {total}"
