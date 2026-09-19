@@ -11,7 +11,8 @@ from backend.expense_manager import (
     get_current_month_category_expenses,
     get_all_expenses,
     cards_function,
-    get_current_month_expenses
+    get_current_month_expenses,
+    get_average_daily
 )
 
 from PyQt5.QtWidgets import (
@@ -90,7 +91,7 @@ class Dashboard(QMainWindow):
         average_daily_layout = QVBoxLayout()
 
         average_daily_title = QLabel("Avg. Daily")
-        average_daily_value = QLabel("₱275")
+        average_daily_value = QLabel(get_average_daily())
 
         average_daily_layout.addWidget(average_daily_title)
         average_daily_layout.addWidget(average_daily_value)

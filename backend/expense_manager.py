@@ -2,7 +2,7 @@ from backend.supabase_client import supabase
 
 from datetime import date
 
-
+#Bar Graph
 def get_monthly_expenses():
     response = (
         supabase
@@ -24,6 +24,7 @@ def get_monthly_expenses():
 
     return monthly_expenses
 
+#Pie Chart
 def get_current_month_category_expenses():
 
     today = date.today()
@@ -80,9 +81,6 @@ def cards_function():
         current_expense = expense["amount"]
         total_expenses += float(current_expense)
 
-    str(total_expenses)
-
-
     return f"₱ {total_expenses}"
 
 #Current Month
@@ -118,7 +116,20 @@ def get_current_month_expenses():
     for expense in response.data:
         currentAmount = expense["amount"]
         total += float(currentAmount)
-
-    str(total)
     
     return f"₱ {total}"
+
+def get_average_daily():
+    total = 0
+    try:
+        amount = get_all_expenses()
+        record = len(amount)
+    except Exception as e:
+        print(f"Error: {e}")
+
+    for expense in amount:
+        current = expense["amount"]
+        total += float(current)
+
+    average = total / record
+    return f"₱ {average:.2f}"
