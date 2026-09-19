@@ -61,7 +61,7 @@ class Dashboard(QMainWindow):
         total_expenses_layout = QVBoxLayout()
 
         total_expenses_title = QLabel("Total Expenses")
-        total_expenses_value = QLabel("₱88,250")
+        total_expenses_value = QLabel(self.cards_function())
 
         total_expenses_layout.addWidget(total_expenses_title)
         total_expenses_layout.addWidget(total_expenses_value)
@@ -355,6 +355,21 @@ class Dashboard(QMainWindow):
         figure.tight_layout()
 
         return canvas
+
+    #Cards Backend
+    def cards_function(self):
+        total_expenses = 0
+        try:
+            expenses = get_all_expenses()
+        except Exception as e:
+            print(f"Error: {e}")
+
+        for expense in expenses:
+            current_expense = expense["amount"]
+            total_expenses += current_expense
+
+
+        return str(total_expenses)
     def show_page(self, page):
         # Remove the current content
         while self.content_layout.count():
