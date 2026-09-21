@@ -57,6 +57,7 @@ def get_current_month_category_expenses():
 
     return category_totals
 
+#Get all Expenses
 def get_all_expenses():
     response = (
         supabase
@@ -135,3 +136,19 @@ def get_average_daily():
 
     average = total / record
     return f"₱ {average:.2f}"
+
+#Add Expenses
+def add_expenses(date, description, category, amount):
+
+    try:
+        data = {
+            "date" : date,
+            "description": description,
+            "category": category,
+            "amount": amount
+        }
+    except Exception as e:
+        print(f"Error: {e}")
+
+    supabase.table("expenses").insert(data).execute()
+

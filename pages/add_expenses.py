@@ -1,4 +1,4 @@
-
+from backend.expense_manager import add_expenses
 from PyQt5.QtWidgets import (
     QWidget,
     QLabel,
@@ -34,6 +34,8 @@ class AddExpenses(QWidget):
 
         self.add_button = QPushButton("Add Expense")
 
+        self.add_button.clicked.connect(self.save_expense)
+
         form_layout = QFormLayout()
 
         form_layout.addRow("Description:", self.description_input)
@@ -47,3 +49,13 @@ class AddExpenses(QWidget):
         layout.addWidget(self.add_button)
 
         self.setLayout(layout)
+
+    def save_expense(self):
+        description = self.description_input.text()
+        amount = self.amount_input.text()
+        category = self.category_input.currentText()
+
+        try:
+            add_expenses(description, category, amount)
+        except Exception as e:
+            print(f"Error: {e}")
