@@ -119,6 +119,7 @@ def get_current_month_expenses():
     
     return f"₱ {total}"
 
+
 #Average Daily
 def get_average_daily():
     total = 0
