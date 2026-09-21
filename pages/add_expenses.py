@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import (
     QFormLayout
 )
 
+from backend.date_manager import get_current_date
 
 class AddExpenses(QWidget):
     def __init__(self):
@@ -51,11 +52,12 @@ class AddExpenses(QWidget):
         self.setLayout(layout)
 
     def save_expense(self):
+        date = get_current_date()
         description = self.description_input.text()
         amount = self.amount_input.text()
         category = self.category_input.currentText()
 
         try:
-            add_expenses(description, category, amount)
+            add_expenses(date, description, category, amount)
         except Exception as e:
             print(f"Error: {e}")
