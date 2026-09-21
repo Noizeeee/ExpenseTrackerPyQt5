@@ -15,6 +15,7 @@ from backend.expense_manager import (
     get_average_daily
 )
 
+from pages.add_expenses import AddExpenses
 from PyQt5.QtWidgets import (
     QApplication,
     QHeaderView,
@@ -381,8 +382,5 @@ class Dashboard(QMainWindow):
             self.content_layout.addWidget(label)
 
         elif page == "add_expenses":
-            label = QLabel("Add Expenses")
-            label.setAlignment(Qt.AlignCenter)
-            label.setFont(QFont("Arial", 24, QFont.Bold))
-                        
-            self.content_layout.addWidget(label)
+            self.add_expenses_page = AddExpenses()
+            self.content_layout.addWidget(self.add_expenses_page)
