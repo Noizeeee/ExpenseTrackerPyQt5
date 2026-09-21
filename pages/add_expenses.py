@@ -1,5 +1,6 @@
 from backend.expense_manager import add_expenses
 from PyQt5.QtWidgets import (
+    QSizePolicy,
     QWidget,
     QLabel,
     QLineEdit,
@@ -9,6 +10,7 @@ from PyQt5.QtWidgets import (
     QFormLayout
 )
 
+from PyQt5.QtCore import Qt
 from backend.date_manager import get_current_date
 
 class AddExpenses(QWidget):
@@ -36,21 +38,31 @@ class AddExpenses(QWidget):
         self.add_button = QPushButton("Add Expense")
 
         self.add_button.clicked.connect(self.save_expense)
+        #SIZING
+        self.description_input.setFixedWidth(500)
+        self.amount_input.setFixedWidth(500)
+        self.category_input.setFixedWidth(500)
+        self.add_button.setFixedWidth(200)
 
         form_layout = QFormLayout()
 
         form_layout.addRow("Description:", self.description_input)
         form_layout.addRow("Amount:", self.amount_input)
         form_layout.addRow("Category:", self.category_input)
+        
 
         layout = QVBoxLayout()
 
         layout.addWidget(title)
         layout.addLayout(form_layout)
-        layout.addWidget(self.add_button)
+        layout.addWidget(self.add_button, alignment=Qt.AlignRight)
 
+        layout.setContentsMargins(50, 50, 50, 50)
+        layout.setSpacing(20)
+        layout.setAlignment(Qt.AlignCenter)
         self.setLayout(layout)
 
+#For Button
     def save_expense(self):
         date = get_current_date()
         description = self.description_input.text()
