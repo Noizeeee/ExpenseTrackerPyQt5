@@ -52,8 +52,10 @@ class AddExpenses(QWidget):
         self.add_button.setFixedWidth(200)
         self.clear_button.setFixedWidth(200)
 
-        button_layout.addWidget(self.add_button)
         button_layout.addWidget(self.clear_button)
+        button_layout.addWidget(self.add_button)
+
+        button_layout.setAlignment(Qt.AlignCenter)
 
         form_layout = QFormLayout()
 
