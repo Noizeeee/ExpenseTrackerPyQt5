@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import (
     QComboBox,
     QPushButton,
     QVBoxLayout,
+    QHBoxLayout,
     QFormLayout
 )
 
@@ -36,13 +37,23 @@ class AddExpenses(QWidget):
         ])
 
         self.add_button = QPushButton("Add Expense")
+        self.clear_button = QPushButton("Clear")
 
         self.add_button.clicked.connect(self.save_expense)
+        self.clear_button.clicked.connect(self.clear)
+
         #SIZING
         self.description_input.setFixedWidth(500)
         self.amount_input.setFixedWidth(500)
         self.category_input.setFixedWidth(500)
+
+
+        button_layout = QHBoxLayout()
         self.add_button.setFixedWidth(200)
+        self.clear_button.setFixedWidth(200)
+
+        button_layout.addWidget(self.add_button)
+        button_layout.addWidget(self.clear_button)
 
         form_layout = QFormLayout()
 
@@ -55,7 +66,7 @@ class AddExpenses(QWidget):
 
         layout.addWidget(title)
         layout.addLayout(form_layout)
-        layout.addWidget(self.add_button, alignment=Qt.AlignRight)
+        layout.addLayout(button_layout)
 
         layout.setContentsMargins(50, 50, 50, 50)
         layout.setSpacing(20)
@@ -73,3 +84,6 @@ class AddExpenses(QWidget):
             add_expenses(date, description, category, amount)
         except Exception as e:
             print(f"Error: {e}")
+
+    def clear(self):
+        pass
