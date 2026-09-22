@@ -8,7 +8,8 @@ from PyQt5.QtWidgets import (
     QPushButton,
     QVBoxLayout,
     QHBoxLayout,
-    QFormLayout
+    QFormLayout,
+    QSizePolicy
 )
 
 from PyQt5.QtCore import Qt
@@ -56,16 +57,18 @@ class AddExpenses(QWidget):
         button_layout.addWidget(self.add_button)
 
         button_layout.setAlignment(Qt.AlignCenter)
-
+        
         form_layout = QFormLayout()
 
         form_layout.addRow("Description:", self.description_input)
         form_layout.addRow("Amount:", self.amount_input)
         form_layout.addRow("Category:", self.category_input)
-        
+
+        form_layout.setLabelAlignment(Qt.AlignRight)
+        form_layout.setFormAlignment(Qt.AlignCenter)
+
 
         layout = QVBoxLayout()
-
         layout.addWidget(title)
         layout.addLayout(form_layout)
         layout.addLayout(button_layout)
@@ -73,7 +76,17 @@ class AddExpenses(QWidget):
         layout.setContentsMargins(50, 50, 50, 50)
         layout.setSpacing(20)
         layout.setAlignment(Qt.AlignCenter)
-        self.setLayout(layout)
+
+        container = QWidget()
+        container.setObjectName("container")
+        container.setLayout(layout)
+
+        main_layout = QVBoxLayout()
+        main_layout.addWidget(container)
+
+        main_layout.setContentsMargins(50, 50, 50, 50)
+
+        self.setLayout(main_layout)
 
 #For Button
     def save_expense(self):
@@ -88,4 +101,6 @@ class AddExpenses(QWidget):
             print(f"Error: {e}")
 
     def clear(self):
-        pass
+        self.description_input.clear()
+        self.amount_input.clear()
+        self.category_input.setCurrentIndex(0)
