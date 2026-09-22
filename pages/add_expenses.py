@@ -50,14 +50,15 @@ class AddExpenses(QWidget):
 
 
         button_layout = QHBoxLayout()
-        self.add_button.setFixedWidth(200)
-        self.clear_button.setFixedWidth(200)
+        self.add_button.setFixedWidth(100)
+        self.clear_button.setFixedWidth(100)
 
         button_layout.addWidget(self.clear_button)
         button_layout.addWidget(self.add_button)
 
         button_layout.setAlignment(Qt.AlignCenter)
-        
+        button_layout.setSpacing(100)
+
         form_layout = QFormLayout()
 
         form_layout.addRow("Description:", self.description_input)
