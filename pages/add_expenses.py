@@ -70,7 +70,7 @@ class AddExpenses(QWidget):
 
 
         layout = QVBoxLayout()
-        layout.addWidget(title)
+        layout.addWidget(title, alignment=Qt.AlignCenter)
         layout.addLayout(form_layout)
         layout.addLayout(button_layout)
 
