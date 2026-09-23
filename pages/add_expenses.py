@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import (
     QVBoxLayout,
     QHBoxLayout,
     QFormLayout,
-    QSizePolicy
+    QMessageBox
 )
 
 from PyQt5.QtCore import Qt
@@ -92,10 +92,29 @@ class AddExpenses(QWidget):
 #For Button
     def save_expense(self):
         date = get_current_date()
-        description = self.description_input.text()
-        amount = self.amount_input.text()
+        description = self.description_input.text().strip()
+        amount = self.amount_input.text().strip()
         category = self.category_input.currentText()
 
+        #Validate Fields
+        if not description:
+            QMessageBox.warning(
+                    self,
+                    "Invalid Input",
+                    "Please enter a description."
+                )
+            self.description_input.setFocus()
+            return
+        
+        if not amount:
+            QMessageBox.warning(
+            self,
+            "Invalid Input",
+            "Please enter an amount."
+        )
+            self.amount_input.setFocus()
+            return
+        
         try:
             add_expenses(date, description, category, amount)
         except Exception as e:

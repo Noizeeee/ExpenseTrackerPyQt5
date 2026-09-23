@@ -139,7 +139,7 @@ def get_average_daily():
 
 #Add Expenses
 def add_expenses(date, description, category, amount):
-
+    
     try:
         data = {
             "date" : date,
