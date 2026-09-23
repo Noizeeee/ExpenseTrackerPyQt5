@@ -44,6 +44,7 @@ class Dashboard(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setFixedSize(1200, 700)
+        self.setWindowTitle("Expense Tracker Ko!")
 
         with open("styles/dashboard.qss", "r") as file:
             self.setStyleSheet(file.read())

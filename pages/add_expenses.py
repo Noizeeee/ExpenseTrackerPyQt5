@@ -89,7 +89,7 @@ class AddExpenses(QWidget):
 
         self.setLayout(main_layout)
 
-#For Button
+    #For Button
     def save_expense(self):
         date = get_current_date()
         description = self.description_input.text().strip()
