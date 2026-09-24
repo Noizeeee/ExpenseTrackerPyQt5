@@ -137,6 +137,7 @@ def get_average_daily():
     average = total / record
     return f"₱ {average:.2f}"
 
+
 #Add Expenses
 def add_expenses(date, description, category, amount):
     
