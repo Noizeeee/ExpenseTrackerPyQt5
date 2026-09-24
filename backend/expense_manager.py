@@ -138,7 +138,6 @@ def get_average_daily():
     return f"₱ {average:.2f}"
 
 
-#Need Validate Fields
 #Add Expenses
 def add_expenses(date, description, category, amount):
     

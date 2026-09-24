@@ -117,6 +117,12 @@ class AddExpenses(QWidget):
         
         try:
             add_expenses(date, description, category, amount)
+            self.clear()
+            QMessageBox.information(
+                        self,
+                        "Expense Tracker",
+                        "Expense added succesfully!"
+                    )
         except Exception as e:
             print(f"Error: {e}")
 
