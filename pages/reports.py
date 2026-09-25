@@ -4,7 +4,9 @@ from PyQt5.QtWidgets import (
     QTableWidgetItem,
     QAbstractItemView,
     QHeaderView,
-    QVBoxLayout
+    QVBoxLayout,
+    QPushButton,
+    QHBoxLayout
 )
 
 from backend.expense_manager import get_all_expenses
@@ -76,8 +78,19 @@ class reports(QWidget):
                 QTableWidgetItem(str(expense["amount"]))
             )
 
+        update_btn = QPushButton("Update")
+        delete_btn = QPushButton("Delete")
+
+        button_container = QWidget()
+        button_container_layout = QHBoxLayout()
+        button_container_layout.addWidget(update_btn)
+        button_container_layout.addWidget(delete_btn)
+
+        button_container.setLayout(button_container_layout)
+
         # Put table into the Reports page
         layout = QVBoxLayout()
         layout.addWidget(self.table)
+        layout.addWidget(button_container)
 
         self.setLayout(layout)
