@@ -106,12 +106,13 @@ class AddExpenses(QWidget):
             self.description_input.setFocus()
             return
         
-        if not amount:
+        if not amount or not amount.isdigit():
             QMessageBox.warning(
             self,
             "Invalid Input",
-            "Please enter an amount."
+            f"{amount} is not a valid amount!"
         )
+            self.clear()
             self.amount_input.setFocus()
             return
         
