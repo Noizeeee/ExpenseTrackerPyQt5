@@ -16,6 +16,7 @@ from backend.expense_manager import (
 )
 
 from pages.add_expenses import AddExpenses
+from pages.reports import reports
 from PyQt5.QtWidgets import (
     QApplication,
     QHeaderView,
@@ -376,12 +377,9 @@ class Dashboard(QMainWindow):
             self.create_dashboard()
 
         elif page == "reports":
-            label = QLabel("Reports")
-            label.setAlignment(Qt.AlignCenter)
-            label.setFont(QFont("Arial", 24, QFont.Bold))
+            self.reports = reports()
+            self.content_layout.addWidget(self.reports)
             
-            self.content_layout.addWidget(label)
-
         elif page == "add_expenses":
             self.add_expenses_page = AddExpenses()
             self.content_layout.addWidget(self.add_expenses_page)
