@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import (
+    QLineEdit,
     QWidget,
     QTableWidget,
     QTableWidgetItem,
@@ -81,6 +82,7 @@ class reports(QWidget):
         update_btn = QPushButton("Update")
         delete_btn = QPushButton("Delete")
 
+        #Buttons
         button_container = QWidget()
         button_container_layout = QHBoxLayout()
         button_container_layout.addWidget(update_btn)
@@ -88,8 +90,13 @@ class reports(QWidget):
 
         button_container.setLayout(button_container_layout)
 
+        #Fields
+        search_input = QLineEdit()
+        search_input.setPlaceholderText("Input the description")
+
         # Put table into the Reports page
         layout = QVBoxLayout()
+        layout.addWidget(search_input)
         layout.addWidget(self.table)
         layout.addWidget(button_container)
 
