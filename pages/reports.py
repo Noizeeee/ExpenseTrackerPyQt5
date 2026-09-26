@@ -79,24 +79,32 @@ class reports(QWidget):
                 QTableWidgetItem(str(expense["amount"]))
             )
 
+        #Buttons
         update_btn = QPushButton("Update")
         delete_btn = QPushButton("Delete")
 
-        #Buttons
         button_container = QWidget()
         button_container_layout = QHBoxLayout()
-        button_container_layout.addWidget(update_btn)
         button_container_layout.addWidget(delete_btn)
+        button_container_layout.addWidget(update_btn)
 
         button_container.setLayout(button_container_layout)
 
         #Fields
+        search_container = QWidget()
+        search_container_layout = QHBoxLayout()
         search_input = QLineEdit()
         search_input.setPlaceholderText("Input the description")
+        
+        search_btn = QPushButton("Search")
+        search_container_layout.addWidget(search_input)
+        search_container_layout.addWidget(search_btn)
+
+        search_container.setLayout(search_container_layout)
 
         # Put table into the Reports page
         layout = QVBoxLayout()
-        layout.addWidget(search_input)
+        layout.addWidget(search_container)
         layout.addWidget(self.table)
         layout.addWidget(button_container)
 
