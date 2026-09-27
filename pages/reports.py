@@ -10,6 +10,8 @@ from PyQt5.QtWidgets import (
     QHBoxLayout
 )
 
+from PyQt5.QtCore import Qt
+
 from backend.expense_manager import get_all_expenses, update_expenses
 
 class reports(QWidget):
@@ -78,6 +80,10 @@ class reports(QWidget):
                 QTableWidgetItem(str(expense["amount"]))
             )
 
+            self.table.item(row, 0).setData(
+                Qt.UserRole,
+                expense["id"]
+            )
         #Buttons
         update_btn = QPushButton("Update")
 
@@ -112,20 +118,34 @@ class reports(QWidget):
         self.setLayout(layout)
 
     def update_expense(self):
+
         selected_row = self.table.currentRow()
 
         if selected_row == -1:
             print("No row selected")
             return
 
+        expense_id = self.table.item(
+            selected_row, 0
+        ).data(Qt.UserRole)
+
         date = self.table.item(selected_row, 0).text()
         description = self.table.item(selected_row, 1).text()
         category = self.table.item(selected_row, 2).text()
         amount = self.table.item(selected_row, 3).text()
 
-        update_expenses(
+        print("ID:", expense_id)
+        print("Date:", date)
+        print("Description:", description)
+        print("Category:", category)
+        print("Amount:", amount)
+
+        result = update_expenses(
+            expense_id,
             date,
             description,
             category,
             amount
         )
+
+        print("Update result:", result)

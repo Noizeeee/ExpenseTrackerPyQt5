@@ -62,7 +62,7 @@ def get_all_expenses():
     response = (
         supabase
         .table("expenses")
-        .select("date, description, category, amount")
+        .select("id, date, description, category, amount")
         .order("date", desc=True)
         .execute()
     )
