@@ -154,17 +154,26 @@ def add_expenses(date, description, category, amount):
     supabase.table("expenses").insert(data).execute()
 
 #Update Expenses
-#def update_expenses(date, description, category, amount):
+def update_expenses(expense_id, date, description, category, amount):
 
-    #try:
-        #data = {
-                    #"date" : date,
-                    #"description": description,
-                    #"category": category,
-                    #"amount": amount
-                #}
+    data = {
+        "date": date,
+        "description": description,
+        "category": category,
+        "amount": amount
+    }
 
-    #except Exception as e:
-        #print(f"Error: {e}")
-    
-    #supabase.table("expenses").update(data).execute()
+    try:
+        response = (
+            supabase
+            .table("expenses")
+            .update(data)
+            .eq("id", expense_id)
+            .execute()
+        )
+
+        return response.data
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
