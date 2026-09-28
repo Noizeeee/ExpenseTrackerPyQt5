@@ -13,7 +13,7 @@ from PyQt5.QtWidgets import (
 
 from PyQt5.QtCore import Qt
 
-from backend.expense_manager import get_all_expenses, update_expenses
+from backend.expense_manager import get_all_expenses, update_expenses, delete_expense
 
 class reports(QWidget):
 
@@ -87,9 +87,10 @@ class reports(QWidget):
             )
         #Buttons
         update_btn = QPushButton("Update")
-
         update_btn.clicked.connect(self.update_expense)
+
         delete_btn = QPushButton("Delete")
+        delete_btn.clicked.connect(self.delete_expenses)
 
         button_container = QWidget()
         button_container_layout = QHBoxLayout()
@@ -183,3 +184,22 @@ class reports(QWidget):
         )
 
         print("Update result:", result)
+
+    def delete_expenses(self):
+        selected_row = self.table.currentRow()
+
+        if selected_row == -1:
+            print("No row selected")
+            return
+
+        expense_id = self.table.item(
+            selected_row, 0
+        ).data(Qt.UserRole)
+
+        print("Deleting ID:", expense_id)
+
+        result = delete_expense(expense_id)
+
+        print("Delete result:", result)
+
+        self.table.removeRow(selected_row)

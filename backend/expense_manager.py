@@ -176,3 +176,16 @@ def update_expenses(expense_id, description, category, amount):
     except Exception as e:
         print(f"Error: {e}")
         return None
+
+#Delete Expenses
+def delete_expense(expense_id):
+    response = (
+        supabase
+        .table("expenses")
+        .delete()
+        .eq("id", expense_id)
+        .execute()
+    )
+
+    print("Delete response:", response)
+    return response.data

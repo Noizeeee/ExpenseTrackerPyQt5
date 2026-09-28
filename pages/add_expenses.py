@@ -126,6 +126,7 @@ class AddExpenses(QWidget):
                     )
         except Exception as e:
             print(f"Error: {e}")
+            
 
     def clear(self):
         self.description_input.clear()
