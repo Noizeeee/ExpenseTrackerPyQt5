@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import (
+    QComboBox,
     QLineEdit,
     QWidget,
     QTableWidget,
@@ -109,10 +110,29 @@ class reports(QWidget):
 
         search_container.setLayout(search_container_layout)
 
+        self.description_input = QLineEdit()
+        self.description_input.setPlaceholderText("Enter description")
+
+        self.amount_input = QLineEdit()
+        self.amount_input.setPlaceholderText("Enter amount")
+
+        self.category_input = QComboBox()
+        self.category_input.addItems([
+            "Food",
+            "Transportation",
+            "Bills",
+            "Shopping",
+            "Entertainment",
+            "Other"
+        ])
+
         # Put table into the Reports page
         layout = QVBoxLayout()
         layout.addWidget(search_container)
         layout.addWidget(self.table)
+        layout.addWidget(self.description_input)
+        layout.addWidget(self.amount_input)
+        layout.addWidget(self.category_input)
         layout.addWidget(button_container)
 
         self.setLayout(layout)
