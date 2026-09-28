@@ -154,10 +154,9 @@ def add_expenses(date, description, category, amount):
     supabase.table("expenses").insert(data).execute()
 
 #Update Expenses
-def update_expenses(expense_id, date, description, category, amount):
+def update_expenses(expense_id, description, category, amount):
 
     data = {
-        "date": date,
         "description": description,
         "category": category,
         "amount": amount

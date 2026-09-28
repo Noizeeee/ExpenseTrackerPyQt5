@@ -111,12 +111,15 @@ class reports(QWidget):
         search_container.setLayout(search_container_layout)
 
         self.description_input = QLineEdit()
+        self.description_input.setFixedWidth(500)
         self.description_input.setPlaceholderText("Enter description")
 
         self.amount_input = QLineEdit()
+        self.amount_input.setFixedWidth(500)
         self.amount_input.setPlaceholderText("Enter amount")
 
         self.category_input = QComboBox()
+        self.category_input.setFixedWidth(500)
         self.category_input.addItems([
             "Food",
             "Transportation",
@@ -134,8 +137,21 @@ class reports(QWidget):
         layout.addWidget(self.amount_input)
         layout.addWidget(self.category_input)
         layout.addWidget(button_container)
-
         self.setLayout(layout)
+
+        #Select Row Input on QLine
+        self.table.itemSelectionChanged.connect(self.input_row)
+
+    def input_row(self):
+        selected_row = self.table.currentRow()
+
+        description = self.table.item(selected_row, 1).text()
+        amount = self.table.item(selected_row, 3).text()
+        category = self.table.item(selected_row, 2).text()
+
+        self.description_input.setText(description)
+        self.amount_input.setText(amount)
+        self.category_input.setCurrentText(category)
 
     def update_expense(self):
 
@@ -149,20 +165,18 @@ class reports(QWidget):
             selected_row, 0
         ).data(Qt.UserRole)
 
-        date = self.table.item(selected_row, 0).text()
-        description = self.table.item(selected_row, 1).text()
-        category = self.table.item(selected_row, 2).text()
-        amount = self.table.item(selected_row, 3).text()
+        # Get the NEW values from the input fields
+        description = self.description_input.text()
+        category = self.category_input.currentText()
+        amount = self.amount_input.text()
 
         print("ID:", expense_id)
-        print("Date:", date)
         print("Description:", description)
         print("Category:", category)
         print("Amount:", amount)
 
         result = update_expenses(
             expense_id,
-            date,
             description,
             category,
             amount
