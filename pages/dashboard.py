@@ -18,6 +18,7 @@ from backend.expense_manager import (
 from pages.add_expenses import AddExpenses
 from pages.reports import reports
 from PyQt5.QtWidgets import (
+    QAbstractItemView,
     QApplication,
     QHeaderView,
     QMainWindow,
@@ -149,6 +150,8 @@ class Dashboard(QMainWindow):
 
         table_container.setLayout(table_layout)
         self.content_layout.addWidget(table_container)
+
+        table.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
     def create_main(self):
         # Main container
