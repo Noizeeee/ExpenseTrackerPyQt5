@@ -105,11 +105,13 @@ class reports(QWidget):
         #Fields
         search_container = QWidget()
         search_container_layout = QHBoxLayout()
-        search_input = QLineEdit()
-        search_input.setPlaceholderText("Input the description")
+        self.search_input = QLineEdit()
+        self.search_input.setPlaceholderText("Input the description")
         
         search_btn = QPushButton("Search")
-        search_container_layout.addWidget(search_input)
+        search_btn = QPushButton("Search")
+        search_btn.clicked.connect(self.search_expenses)
+        search_container_layout.addWidget(self.search_input)
         search_container_layout.addWidget(search_btn)
 
         search_container.setLayout(search_container_layout)
@@ -206,3 +208,17 @@ class reports(QWidget):
         print("Delete result:", result)
 
         self.table.removeRow(selected_row)
+
+
+    def search_expenses(self):
+
+        search_text = self.search_input.text().lower()
+
+        for row in range(self.table.rowCount()):
+
+            description = self.table.item(row, 1).text().lower()
+
+            self.table.setRowHidden(
+                row,
+                search_text not in description
+            )
