@@ -85,6 +85,8 @@ class reports(QWidget):
                 Qt.UserRole,
                 expense["id"]
             )
+
+        self.table.setEditTriggers(QAbstractItemView.NoEditTriggers)
         #Buttons
         update_btn = QPushButton("Update")
         update_btn.clicked.connect(self.update_expense)
