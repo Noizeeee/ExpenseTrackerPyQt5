@@ -106,9 +106,8 @@ class reports(QWidget):
         search_container = QWidget()
         search_container_layout = QHBoxLayout()
         self.search_input = QLineEdit()
-        self.search_input.setPlaceholderText("Input the description")
+        self.search_input.setPlaceholderText("Search...")
         
-        search_btn = QPushButton("Search")
         search_btn = QPushButton("Search")
         search_btn.clicked.connect(self.search_expenses)
         search_container_layout.addWidget(self.search_input)
