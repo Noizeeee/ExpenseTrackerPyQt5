@@ -188,7 +188,7 @@ class reports(QWidget):
         )
 
         print("Update result:", result)
-
+    #Delete Method
     def delete_expenses(self):
         selected_row = self.table.currentRow()
 
@@ -208,7 +208,7 @@ class reports(QWidget):
 
         self.table.removeRow(selected_row)
 
-
+    #Search Method
     def search_expenses(self):
 
         search_text = self.search_input.text().lower()
