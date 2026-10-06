@@ -53,6 +53,7 @@ class Dashboard(QMainWindow):
             
         self.create_main()
 
+    #Create Dashboard
     def create_dashboard(self):
         #Grid for Three Cards
         Cards = QWidget()
