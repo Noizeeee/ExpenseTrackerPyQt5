@@ -45,3 +45,197 @@
 #container {
     background-color: white;
 }
+
+/* =========================
+   REPORTS PAGE
+   ========================= */
+
+#reports {
+    background-color: #f5f6f8;
+}
+
+
+/* =========================
+   SEARCH
+   ========================= */
+
+#search_container {
+    background-color: transparent;
+}
+
+#search_input {
+    min-height: 38px;
+    padding: 0 12px;
+    border: 1px solid #d9dde3;
+    border-radius: 8px;
+    background-color: white;
+    color: #222222;
+    font-size: 14px;
+}
+
+#search_input:focus {
+    border: 1px solid #4a90e2;
+}
+
+#search_btn {
+    min-height: 38px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4a90e2;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#search_btn:hover {
+    background-color: #357abd;
+}
+
+#search_btn:pressed {
+    background-color: #2868a8;
+}
+
+
+/* =========================
+   EXPENSE TABLE
+   ========================= */
+
+#expense_table {
+    border: 1px solid #e0e3e7;
+    border-radius: 8px;
+    background-color: white;
+    gridline-color: #eeeeee;
+    color: #222222;
+    font-size: 14px;
+    selection-background-color: #dcecff;
+    selection-color: #222222;
+}
+
+#expense_table::item {
+    padding: 8px;
+    border: none;
+}
+
+#expense_table::item:selected {
+    background-color: #dcecff;
+    color: #222222;
+}
+
+
+/* Table Header */
+
+#expense_table QHeaderView::section {
+    background-color: #f1f3f5;
+    color: #333333;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #d9dde3;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+
+/* =========================
+   INPUT FIELDS
+   ========================= */
+
+#description_input,
+#amount_input {
+    min-height: 38px;
+    padding: 0 12px;
+    border: 1px solid #d9dde3;
+    border-radius: 8px;
+    background-color: white;
+    color: #222222;
+    font-size: 14px;
+}
+
+#description_input:focus,
+#amount_input:focus {
+    border: 1px solid #4a90e2;
+}
+
+
+/* =========================
+   CATEGORY
+   ========================= */
+
+#category_input {
+    min-height: 38px;
+    padding: 0 12px;
+    border: 1px solid #d9dde3;
+    border-radius: 8px;
+    background-color: white;
+    color: #222222;
+    font-size: 14px;
+}
+
+#category_input:focus {
+    border: 1px solid #4a90e2;
+}
+
+#category_input QAbstractItemView {
+    background-color: white;
+    color: #222222;
+    border: 1px solid #d9dde3;
+    selection-background-color: #dcecff;
+    selection-color: #222222;
+}
+
+
+/* =========================
+   BUTTON CONTAINER
+   ========================= */
+
+#button_container {
+    background-color: transparent;
+}
+
+
+/* =========================
+   UPDATE BUTTON
+   ========================= */
+
+#update_btn {
+    min-height: 40px;
+    padding: 0 25px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4a90e2;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#update_btn:hover {
+    background-color: #357abd;
+}
+
+#update_btn:pressed {
+    background-color: #2868a8;
+}
+
+
+/* =========================
+   DELETE BUTTON
+   ========================= */
+
+#delete_btn {
+    min-height: 40px;
+    padding: 0 25px;
+    border: none;
+    border-radius: 8px;
+    background-color: #e05252;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#delete_btn:hover {
+    background-color: #c93f3f;
+}
+
+#delete_btn:pressed {
+    background-color: #ad3333;
+}

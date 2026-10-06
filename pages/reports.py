@@ -20,11 +20,14 @@ class reports(QWidget):
     def __init__(self):
         super().__init__()
 
+        self.setObjectName("reports")
+
         self.create_table()
 
     def create_table(self):
 
         self.table = QTableWidget()
+        self.table.setObjectName("expense_table")
 
         self.table.setColumnCount(4)
 
@@ -90,12 +93,16 @@ class reports(QWidget):
         
         #Buttons
         update_btn = QPushButton("Update")
+        update_btn.setObjectName("update_btn")
         update_btn.clicked.connect(self.update_expense)
 
         delete_btn = QPushButton("Delete")
+        delete_btn.setObjectName("delete_btn")
         delete_btn.clicked.connect(self.delete_expenses)
 
         button_container = QWidget()
+        button_container.setObjectName("button_container")
+
         button_container_layout = QHBoxLayout()
         button_container_layout.addWidget(delete_btn)
         button_container_layout.addWidget(update_btn)
@@ -104,11 +111,15 @@ class reports(QWidget):
 
         #Fields
         search_container = QWidget()
+        search_container.setObjectName("search_container")
+
         search_container_layout = QHBoxLayout()
         self.search_input = QLineEdit()
+        self.search_input.setObjectName("search_input")
         self.search_input.setPlaceholderText("Search...")
         
         search_btn = QPushButton("Search")
+        search_btn.setObjectName("search_btn")
         search_btn.clicked.connect(self.search_expenses)
         search_container_layout.addWidget(self.search_input)
         search_container_layout.addWidget(search_btn)
@@ -116,14 +127,17 @@ class reports(QWidget):
         search_container.setLayout(search_container_layout)
 
         self.description_input = QLineEdit()
+        self.description_input.setObjectName("description_input")
         self.description_input.setFixedWidth(500)
         self.description_input.setPlaceholderText("Enter description")
 
         self.amount_input = QLineEdit()
+        self.amount_input.setObjectName("amount_input")
         self.amount_input.setFixedWidth(500)
         self.amount_input.setPlaceholderText("Enter amount")
 
         self.category_input = QComboBox()
+        self.category_input.setObjectName("category_input")
         self.category_input.setFixedWidth(500)
         self.category_input.addItems([
             "Food",

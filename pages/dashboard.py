@@ -354,11 +354,21 @@ class Dashboard(QMainWindow):
 
         ax = figure.add_subplot(111)
 
-        ax.pie(
-            expenses,
-            labels=categories,
-            autopct = "%1.1f%%"
-        )
+        if not expenses or sum(expenses) == 0:
+            ax.text(
+                0.5,
+                0.5,
+                "No expenses yet",
+                ha="center",
+                va="center"
+            )
+            ax.axis("off")
+        else:
+            ax.pie(
+                expenses,
+                labels=categories,
+                autopct="%1.1f%%"
+            )
 
         ax.set_title("Expense Categories")
 
