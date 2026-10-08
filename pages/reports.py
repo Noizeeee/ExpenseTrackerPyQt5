@@ -24,6 +24,7 @@ class reports(QWidget):
 
         self.create_table()
 
+    #Create table
     def create_table(self):
 
         self.table = QTableWidget()
@@ -172,6 +173,7 @@ class reports(QWidget):
         self.amount_input.setText(amount)
         self.category_input.setCurrentText(category)
 
+    #Update Expenses
     def update_expense(self):
 
         selected_row = self.table.currentRow()
@@ -202,6 +204,7 @@ class reports(QWidget):
         )
 
         print("Update result:", result)
+
     #Delete Method
     def delete_expenses(self):
         selected_row = self.table.currentRow()
